@@ -5,16 +5,29 @@ import javax.persistence.*;
 @Entity
 @Table(name = "cars")
 public class Car {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "car_id", nullable = false, insertable = true, updatable = true)
     private Long carId;
+
+    @OneToOne(mappedBy = "car", cascade = CascadeType.ALL)
     private User user;
+
+    @Column(name = "model")
     private String model;
+
+    @Column(name = "series")
     private int series;
 
-    public Car () {
-
+    // Геттеры и сеттеры
+    public Long getCarId() {
+        return carId;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "cars")
+    public void setCarId(Long carId) {
+        this.carId = carId;
+    }
+
     public User getUser() {
         return user;
     }
@@ -23,21 +36,6 @@ public class Car {
         this.user = user;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "car_id", nullable = false, insertable = true, updatable = true)
-    public Long getCarId () {
-        return carId;
-    }
-
-    public void setCarId(Long carId) {
-        this.carId = carId;
-    }
-
-
-
-    @Basic
-    @Column(name = "model")
     public String getModel() {
         return model;
     }
@@ -45,21 +43,12 @@ public class Car {
     public void setModel(String model) {
         this.model = model;
     }
-    @Basic
-    @Column(name = "series")
+
     public int getSeries() {
         return series;
     }
 
     public void setSeries(int series) {
         this.series = series;
-    }
-
-    @Override
-    public String toString() {
-        return "Car{" +
-                "model='" + model + '\'' +
-                ", series=" + series +
-                '}';
     }
 }

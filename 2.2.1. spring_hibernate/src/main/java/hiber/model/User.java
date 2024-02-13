@@ -8,14 +8,12 @@ public class User {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name = "id")
    private Long id;
 
+   @OneToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "car_id")
    private Car car;
-   @OneToOne
-   @JoinColumn(name = "car_id", referencedColumnName = "car_id")
-   public Car getCar() {
-      return car;
-   }
 
    @Column(name = "name")
    private String firstName;
@@ -26,20 +24,21 @@ public class User {
    @Column(name = "email")
    private String email;
 
-   public User() {}
-   
-   public User(String firstName, String lastName, String email) {
-      this.firstName = firstName;
-      this.lastName = lastName;
-      this.email = email;
-   }
-
+   // Геттеры и сеттеры
    public Long getId() {
       return id;
    }
 
    public void setId(Long id) {
       this.id = id;
+   }
+
+   public Car getCar() {
+      return car;
+   }
+
+   public void setCar(Car car) {
+      this.car = car;
    }
 
    public String getFirstName() {
@@ -65,5 +64,4 @@ public class User {
    public void setEmail(String email) {
       this.email = email;
    }
-
 }
