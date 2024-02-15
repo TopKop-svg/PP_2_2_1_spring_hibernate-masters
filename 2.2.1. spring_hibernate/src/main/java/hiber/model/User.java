@@ -23,7 +23,6 @@ public class User {
    @Column(name = "email")
    private String email;
 
-   // Геттеры и сеттеры
    public Long getId() {
       return id;
    }

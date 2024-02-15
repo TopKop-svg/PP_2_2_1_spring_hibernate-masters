@@ -18,10 +18,9 @@ public class UserServiceImp implements UserService {
    @Transactional
    @Override
    public void add(User user) {
-      // Если у пользователя есть машина, сохраняем ее перед сохранением пользователя
       Car car = user.getCar();
       if (car != null) {
-         userDao.addCar(car); // Сохраняем машину
+         userDao.addCar(car);
       }
       userDao.add(user);
    }
@@ -29,7 +28,7 @@ public class UserServiceImp implements UserService {
    @Transactional
    @Override
    public void add(Car car) {
-      userDao.addCar(car); // Добавляем машину в базу данных
+      userDao.addCar(car);
    }
 
 
