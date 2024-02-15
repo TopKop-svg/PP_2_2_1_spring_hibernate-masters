@@ -10,9 +10,8 @@ public class User {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    @Column(name = "id")
    private Long id;
-
-   @OneToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "car_id")
+   @OneToOne(fetch = FetchType.EAGER)
+   @JoinColumn(name = "car")
    private Car car;
 
    @Column(name = "name")

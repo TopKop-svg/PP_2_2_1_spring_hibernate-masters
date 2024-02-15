@@ -21,14 +21,17 @@ public class UserServiceImp implements UserService {
       // Если у пользователя есть машина, сохраняем ее перед сохранением пользователя
       Car car = user.getCar();
       if (car != null) {
-         // Помещаем машину пользователя в базу данных
-         user.setCar(null); // Чтобы избежать рекурсии
-         userDao.add(user);
-         car.setUser(user); // Устанавливаем связь с пользователем
-         user.setCar(car); // Обратно устанавливаем машину у пользователя
+         userDao.addCar(car); // Сохраняем машину
       }
       userDao.add(user);
    }
+
+   @Transactional
+   @Override
+   public void add(Car car) {
+      userDao.addCar(car); // Добавляем машину в базу данных
+   }
+
 
    @Transactional(readOnly = true)
    @Override
