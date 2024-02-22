@@ -30,6 +30,10 @@ public class UserServiceImp implements UserService {
    public void add(Car car) {
       userDao.addCar(car);
    }
+   @Transactional(readOnly = true)
+   public User getUserByHisCar (Car car) {
+      return userDao.getUserByHisCar(car);
+   }
 
 
    @Transactional(readOnly = true)
